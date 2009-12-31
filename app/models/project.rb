@@ -63,6 +63,14 @@ class Project < ActiveRecord::Base
 		product_line.id_string+"/"+ self.qc_name
 	end
 	
+	def qc_model(clazz)
+		if clazz.is_a? String
+			clazz = "QC::Models::#{clazz}".constantize
+		end
+		clazz.attach_project(self)
+		clazz
+	end
+	
 	def tc_importer
 		QC::TCImporter.new(self)
 	end

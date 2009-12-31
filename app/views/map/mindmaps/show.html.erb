@@ -1,86 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-    <!-- Internet Explorer 8 Hack -->
-    <meta http-equiv="Content-type" value="text/html;charset=UTF-8">
-    <title>WiseMapping - Test </title>
-    <link rel="stylesheet" type="text/css" href="../css/editor.css">
-    <link rel="stylesheet" type="text/css" href="../css/bubble.css">
-    <link rel="stylesheet" type="text/css" href="../css/thirdparty.css">
-
-    <script type="text/javascript" src="../js/engine.js"></script>
-    <script type="text/javascript" src="http://www.wisemapping.com/dwr/interface/LoggerService.js"></script>
-
-    <script type='text/javascript' src='../js/wiseLibrary.js'></script>
-    <script type='text/javascript' src='../js/core.js'></script>
-
-    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
-
-    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
-</head>
-<body>
-
-
-
-
-<div id="editorHeader">
-    <div id="headerToolbar">
-        
-            <div id="headerTitle">Test<span id="headerSubTitle">&nbsp;last modification by dazuiba</span></div>
-        
-        
-            
-                <div id="headerActions">
-
-                    Welcome
-                    , sam
-                    | <a href="/c/mymaps.htm" title="My Wisemaps">
-                    My Wisemaps
-                </a>
-                    | <a href="/c/settings.htm" rel="moodalbox 400px 250px wizard"
-                         title="Do you want to change you user options?. Here is the place.">
-                    Settings
-                </a>
-                    | <a href="/c/logout.htm" title="Logout">
-                    Logout
-                </a>
-
-                </div>
-            
-            
-        
-    </div>
-</div>
-<div id="headerLoading">
-    Loading ...
-</div>
-
-
-<form method="post" id="printForm" name="printForm" action='export.htm' style="height:100%;"
-      target="Test">
-    <input type="hidden" name="action" value="print"/>
-    <input type="hidden" name="mapId" value="14631"/>
-</form>
-
-<div id="waitDialog" style="display:none">
-    <div id="waitingContainer">
-        <div class="loadingIcon"></div>
-        <div class="loadingText">
-            Loading ...
-        </div>
-    </div>
-</div>
-
-<div id="errorDialog" style="display:none">
-    <div id="errorContainer">
-
-        <div class="loadingIcon"></div>
-        <div class="loadingText">
-            An unexpected error has occurred initializing this page. <br/>We'll solve this problem as soon as possible. Please, click <a href="mymaps.htm">here</a> to return to your mindmap list.   
-        </div>
-    </div>
-</div>
-
 <script type="text/javascript">
 
     var waitDialog = new core.WaitDialog();
@@ -93,11 +10,8 @@
     });
 
 
-    var mapId = '14631';
-    // var mapXml = '<%=@mind_map.mm_xml.gsub("\n","")%>';
-    var mapXml = '<map name="17988"><topic central="true" text="TDMP PLAN" shape="rounded rectagle"><topic position="303,0" text="&#x6027;&#x80fd;&#x4e2d;&#x5fc3;" shape="line"><link url="www.google.com"/></topic><topic position="300,-50" text="??????????????????" shape="line"><icon id="bullet_black"/><icon id="bullet_black"/><icon id="bullet_black"/><icon id="bullet_black"/><icon id="bullet_black"/><icon id="bullet_black"/><icon id="bullet_black"/><topic order="0" text="????????????????????????" shape="line"/><topic order="1" text="?????????/????????????(????????????)" shape="line"/><topic order="2" text="????????????????????????(????????????)" shape="line"/><topic order="3" text="QC??????" shape="line"/></topic><topic position="-171,50" text="??????" shape="line"><topic order="0" text="????????????????????????" shape="line"/><topic order="1" text="????????????????????????" shape="line"/><topic order="2" text="????????????????????????" shape="line"/><topic order="3" text="????????????????????????" shape="line"><icon id="bullet_green"/><icon id="bullet_green"/><icon id="bullet_green"/><icon id="bullet_green"/></topic><topic order="4" text="??????????????????(???????????????????????????)" shape="line"/></topic><topic position="-174,-100" text="coding" shape="line"><icon id="onoff_add"/><icon id="bulb_light_off"/><topic order="0" text="?????????????????????()" shape="line"><icon id="face_smile"/><icon id="face_smile"/><icon id="face_smile"/><icon id="face_smile"/><icon id="face_smile"/><icon id="face_smile"/><topic order="0" text="??????????????????(??????????????????5?????????,6????????????)" shape="line"/><topic order="1" text="??????????????????" shape="line"/><topic order="2" text="????????????????????????(WEB)" shape="line"/></topic><topic order="1" text="???????????????" shape="line"><topic order="0" text="Q2??????4?????????????????????(Q2)" shape="line"/><topic order="1" text="??????QTP???ruby??????" shape="line"/></topic></topic><topic position="-151,100" text="??????" shape="line"><topic order="0" text="????????????????????????" shape="line"/><topic order="1" text="????????????????????????(??????????????????)" shape="line"/></topic><topic position="279,-150" text="????????????" shape="line"><topic order="0" text="??????????????????(5?????????????????????)" shape="line"/><topic order="1" text="????????????(Q3?????? ??????)" shape="line"/><topic order="2" text="??????????????????" shape="line"/></topic><topic position="314,150" text="??????????????????" shape="line"><icon id="bullet_orange"/></topic></topic></map>';
-    
-    var mapXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><map><node TEXT="tttttt" STYLE="line"><node TEXT="fdfd" STYLE="line"/><node TEXT="fdfdfd" STYLE="line"/><node TEXT="fdfdf" STYLE="line"/><node TEXT="fdfdfd" STYLE="line"/></node></map>'
+    var mapId = '<%= @mindmap.id %>';
+    var mapXml = '<%= @mindmap.xml %>'
     var editorProperties = {"zoom":0.7};
     var isTryMode = false;
 
@@ -127,13 +41,13 @@
 
 <div id="topicShapePanel" class="toolbarPanel">
     <!--<div id="automatic" class="toolbarPanelLink">Automatic</div>-->
-    <div id="rectagle" class="toolbarPanelLink"><img src="../images/shape-rectangle.png" alt="Rectangle" width="40px"
+    <div id="rectagle" class="toolbarPanelLink"><img src="/map/images/shape-rectangle.png" alt="Rectangle" width="40px"
                                                      height="25px"></div>
-    <div id="rounded rectagle" class="toolbarPanelLink"><img src="../images/shape-rectangle-rounded.png"
+    <div id="rounded rectagle" class="toolbarPanelLink"><img src="/map/images/shape-rectangle-rounded.png"
                                                              alt="Rounded Rectangle" width="40px" height="25px"></div>
-    <div id="line" class="toolbarPanelLink"><img src="../images/shape-line.png" alt="Line" width="40px" height="7px">
+    <div id="line" class="toolbarPanelLink"><img src="/map/images/shape-line.png" alt="Line" width="40px" height="7px">
     </div>
-    <div id="elipse" class="toolbarPanelLink"><img src="../images/shape-elipse.png" alt="Elipse" width="40px"
+    <div id="elipse" class="toolbarPanelLink"><img src="/map/images/shape-elipse.png" alt="Elipse" width="40px"
                                                    height="25px"></div>
 </div>
 
@@ -294,9 +208,6 @@
 
                         </a>
                     </fieldset>
-                
-                
-            
         </div>
     </div>
 </div>
@@ -320,22 +231,16 @@
     <div id="helpButtonFirstSteps"
          style="text-align:center; width:90px; height:20px; background-color:#f5f5f5; border: 1px solid #BBB6D6; cursor:pointer; padding-left:5px; margin-left:3px;float:left;">
         <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:5px;"><img
-                src="../images/help.png"/></div>
+                src="/map/images/help.png"/></div>
         <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:4px;">First Steps</div>
     </div>
     <div id="helpButtonKeyboard"
          style="text-align:center; width:100px; height:20px; background-color:#f5f5f5; border: 1px solid #BBB6D6; cursor:pointer; padding-left:5px; margin-left:3px;float:left;">
         <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:5px;"><img
-                src="../images/help.png"/></div>
+                src="/map/images/help.png"/></div>
         <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:4px;">Shortcuts</div>
     </div>
-
 </div>
-
 <div id="ffoxworkarround" style="display:none;"><input id="ffoxWorkarroundInput" type="text"></div>
-
-    <script type="text/javascript" src="http://www.wisemapping.com/dwr/interface/MapEditorService.js"></script>
-
-<script type="text/javascript" src="../js/editor.js"></script>
-</body>
-</html>
+<script type="text/javascript" src="/map/js/editservice.js"></script>
+<script type="text/javascript" src="/map/js/editor.js"></script>

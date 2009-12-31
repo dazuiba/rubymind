@@ -1,56 +1,137 @@
+require 'net/http'
+
 class Rs::RsLogsController < ApplicationController
   def index
   	set_current_user
-
     #判断显示日报的日期
     if params[:id].nil?
        #生成当天的日报记录
   	   @daily_log = RsDailyLog.find_or_initialize_by_created_on_and_user_id(Date.today, User.current.id)
        @daily_log.save
+       @date = Date.today
     else
        #获取指定日期的日报进行显示
        daily_log_id = params[:id]
        @daily_log = RsDailyLog.find_by_id_and_user_id(daily_log_id,User.current.id)
+       #查看历史日报，不可编辑
+       @disable = 1
+       @date = @daily_log.created_on
     end
 
     #@project = Member.user_active_projects(User.current)
-    @project = Project.find(:all, :limit=>3)
-
+    @project = Project.find_all_by_id(341)
+    @daywork = getdayworkinfo(User.current.nickname,@date)
     #调试用代码
     @qc = Array.new()
     n = 0
-    for i in 0..@project.length-1
-     @qc[n] = Hash.new()
-     @qc[n]["id"] = @project[i].id
-     @qc[n]["type"] = 1
-     @qc[n]["name"]=@project[i].name
-     @qc[n]["output_type"] = 1
-     @qc[n]["output_type_name"]="编写TC数："
-     @qc[n]["output"]="50"
-     n = n+1
-     @qc[n] = Hash.new()
-     @qc[n]["id"] = @project[i].id
-     @qc[n]["type"] = 1
-     @qc[n]["name"]=@project[i].name
-     @qc[n]["output_type"] = 2
-     @qc[n]["output_type_name"]="执行TC数："
-     @qc[n]["output"]="50"
-     n = n+1
-     
-     @qc[n] = Hash.new()
-     @qc[n]["id"] = @project[i].id
-     @qc[n]["type"] = 1
-     @qc[n]["name"]=@project[i].name
-     @qc[n]["output_type"] = 3
-     @qc[n]["output_type_name"]="验证BUG数："
-     @qc[n]["output"]="50"
-     n = n+1
+
+    #处理项目数据
+    @project.each do | project |
+     #判断QC数据是否为空
+     tempnum = project.qc_model("Test").create_count(:login=>"youwenjuan", :date=>@date)
+     unless tempnum==0
+     #
+        @qc[n] = Hash.new()
+        @qc[n]["id"] = project.id
+        @qc[n]["type"] = 1
+        @qc[n]["type_name"] = "项目"
+        @qc[n]["name"]=project.name
+        @qc[n]["output_type"] = 1
+        @qc[n]["output_type_name"]="编写TC数："
+        @qc[n]["output"] = tempnum
+        n = n+1
+     end
+
+     tempnum = project.qc_model("Test").execute_count(:login=>"youwenjuan", :date=>@date)
+     unless tempnum==0
+        @qc[n] = Hash.new()
+        @qc[n]["id"] = project.id
+        @qc[n]["type"] = 1
+        @qc[n]["type_name"] = "项目"
+        @qc[n]["name"]=project.name
+        @qc[n]["output_type"] = 2
+        @qc[n]["output_type_name"]="执行TC数："
+        @qc[n]["output"]=tempnum
+        n = n+1
+     end
+
+     tempnum = project.qc_model("Bug").confirmed_count(:login=>"youwenjuan", :date=>@date)
+     unless tempnum==0
+        @qc[n] = Hash.new()
+        @qc[n]["id"] = project.id
+        @qc[n]["type"] = 1
+        @qc[n]["type_name"] = "项目"
+        @qc[n]["name"]=project.name
+        @qc[n]["output_type"] = 3
+        @qc[n]["output_type_name"]="验证BUG数："
+        @qc[n]["output"]=tempnum
+        n = n+1
+     end
+
+      #新增一条记录填写其它工作信息
+        @qc[n] = Hash.new()
+        @qc[n]["id"] = project.id
+        @qc[n]["type"] = 1
+        @qc[n]["type_name"] = "项目"
+        @qc[n]["name"]=project.name
+        @qc[n]["output_type"] = 4
+        #@qc[n]["output_type_name"]=""
+        rs_log_project_out = RsLog.find_or_initialize_by_item_type_and_item_id_and_daily_log_id_and_output_type(1,project.id,@daily_log.id,4)
+        @qc[n]["output"]=rs_log_project_out.output
+        n = n+1
+
     end
+#日常处理
+#    @daywork.each do |work|
+#
+#     @qc[n] = Hash.new()
+#     @qc[n]["id"] = @project[i].id
+#     @qc[n]["type"] = 2
+#     @qc[n]["name"]=@project[i].name
+#     @qc[n]["output_type"] = 1
+#     @qc[n]["output_type_name"]="编写TC数："
+#     @qc[n]["output"]="50"
+#     n = n+1
+#
+#     @qc[n] = Hash.new()
+#     @qc[n]["id"] = @project[i].id
+#     @qc[n]["type"] = 2
+#     @qc[n]["name"]=@project[i].name
+#     @qc[n]["output_type"] = 2
+#     @qc[n]["output_type_name"]="执行TC数："
+#     @qc[n]["output"]="50"
+#     n = n+1
+#
+#     @qc[n] = Hash.new()
+#     @qc[n]["id"] = @project[i].id
+#     @qc[n]["type"] = 2
+#     @qc[n]["name"]=@project[i].name
+#     @qc[n]["output_type"] = 3
+#     @qc[n]["output_type_name"]="验证BUG数："
+#     @qc[n]["output"]="50"
+#     n = n+1
+#    end
+
+     #处理其他类型数据
+     rs_log_other = RsLog.find_all_by_item_type_and_item_id_and_daily_log_id_and_output_type(3,99,@daily_log.id,4)
+     rs_log_other.each do |other|
+        @qc[n] = Hash.new()
+        @qc[n]["id"] = 99
+        @qc[n]["type"] = 3
+        @qc[n]["type_name"] = "其它"
+        @qc[n]["name"]=other.comments
+        @qc[n]["output_type"] = 4
+        #@qc[n]["output_type_name"]="验证BUG数："
+        @qc[n]["output"]=other.output
+        n = n+1
+     end
 
   end
 
   def show
-    @daily_log = RsDailyLog.find(:all, :limit=>7)
+    
+    daybefor = Date.today-7;
+    @daily_log = RsDailyLog.find_by_sql("select * from rs_daily_logs where created_on <='"+Date.today.to_s+"' and created_on >'"+daybefor.to_s+"'")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -81,7 +162,6 @@ class Rs::RsLogsController < ApplicationController
     check = 0                              #数据保存是否成功标志
 
     #获取提交记录条数
-    #
     rs_log_num = Array.new()
     rs_log_num = params[:rs_log][:item_id]
     for i in 0..rs_log_num.length-1
@@ -120,11 +200,10 @@ class Rs::RsLogsController < ApplicationController
 
     #增加的“其它”类型信息进行保存
     rs_log_e_num.each do |rs_other|
-        @rs_log_e = RsLog.find_or_initialize_by_daily_log_id_and_item_id_and_item_type_and_output_type(params[:rs_log][:daily_log_id][0],99,3,output_type)
-        @rs_log_e.comments = params[:rs_log_e][:item_name][j]
+        @rs_log_e = RsLog.find_or_initialize_by_daily_log_id_and_item_id_and_item_type_and_output_type_and_comments(params[:rs_log][:daily_log_id][0],99,3,output_type,params[:rs_log_e][:item_name][j])
+        #@rs_log_e.comments = params[:rs_log_e][:item_name][j]
         @rs_log_e.input = params[:rs_log_e][:input][j]
         @rs_log_e.output = params[:rs_log_e][:output][j]
-        @rs_log_e.stage = params[:rs_log_e][:stat][j]
         j = j+1
 
         if @rs_log_e.input
@@ -137,7 +216,10 @@ class Rs::RsLogsController < ApplicationController
 
     #备注信息进行保存
     @daily_log = RsDailyLog.find(params[:rs_log][:daily_log_id][0])
-    @daily_log.comments = params[:daily_log][:comments]
+    #params[:daily_log][:comments].chop!
+    @daily_log.comments = params[:daily_log][:comments].chop!
+    logger.info("=========================")
+    logger.info(@daily_log.comments)
     @daily_log.save!
 
     #返回view文件处理
@@ -182,4 +264,22 @@ class Rs::RsLogsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  #获取项目和日常的name
+  def getdayworkinfo(nickname,date)      
+      daystr = get_wf "/dailymanage/getdailyinfo.aspx?username=#{nickname}&time=#{date.to_date.to_s(:db)}"
+      daystr.split(",").map do |e|
+         get_wf "/dailymanage/getdailyinfo.aspx?id=#{e}"
+      end
+  end
+  
+  private  
+  def get_wf(uri)  	
+		curl(uri, "zhushi", "1")
+  end
+  
+  def curl(uri, username, password)
+		`curl 'http://wf.taobao.org/#{uri}' -u '#{username}:#{password}' --ntlm`
+  end
+
 end

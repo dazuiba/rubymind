@@ -1,9 +1,12 @@
-<%= link_to "历史", :action => "show" %>
 <hr/>
 <table width="900">
 <% @daily_log.each  do |daily_log, clazz| %>
   <tr class= <%= clazz %> >
-      <td><a name ="data" href="index?"<%= daily_log.created_on %>><%= daily_log.created_on %></a></td>
+    <% if daily_log.created_on==Date.today %>
+      <%= link_to daily_log.created_on,:action=>"index" %>
+    <%  else %>
+      <%= link_to daily_log.created_on,:action=>"index",:id=>daily_log.id %>
+    <% end %>
   </tr>
 <% end %>
 </table>

@@ -1,3 +1,4 @@
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,6 +42,7 @@ public class Tools {
     }
 	 
 	 public static void main(String[] args) throws Exception {
-		System.out.println(Tools.mm_2_xml(new FileInputStream("test.chs.mm.xml")));
+		 String s = "<map name=\"1\"><topic central=\"true\" text=\"Subject\"/></map>";
+		System.out.println(Tools.mm_2_xml(new ByteArrayInputStream(s.getBytes())));
 	}
 }

@@ -9,7 +9,7 @@
 <div class="container person per-1 yui-skin-sam">
 <div class="header">
    <h1>工时汇报系统</h1>
-   <p class="info">欢迎柱石登陆成功！<a href="../user/loginOut.do">[退出]</a></p>
+   <p class="info">欢迎<%= User.current.nickname %>登陆成功！</p>
    <p class="wid">点缀</p>
 </div>
 
@@ -21,7 +21,7 @@
 			</ul>
 			<ul class="child">
 				<li>员工工时汇报</li>
-				<li><a href="../submit/segmentReportList.htm" title="">工时汇报列表</a></li>
+				<li><a href="/rs/rs_logs/show" title="">工时汇报列表</a></li>
 			</ul>
 		</div>
 		<div class="meat">
