@@ -46,6 +46,8 @@ public class FreemindImporter
     private static final String ITALIC = "italic";
     private static final String EMPTY_NOTE = "";
 
+   
+    
     public MindMap importMap(String mapName,String description,InputStream input) throws ImporterException {
 
         final MindMap map;
@@ -84,7 +86,7 @@ public class FreemindImporter
         return map;
     }
 
-    private void addTopicFromNode(Node mainNode, TopicType topic)
+    public static void  addTopicFromNode(Node mainNode, TopicType topic)
     {
         final List<Object> freemindNodes = mainNode.getArrowlinkOrCloudOrEdge();
         TopicType currentTopic = topic;
@@ -94,7 +96,7 @@ public class FreemindImporter
             if (freemindNode instanceof Node)
             {
                 final Node node = (Node) freemindNode;
-                TopicType newTopic = mindmapObjectFactory.createTopicType();
+                TopicType newTopic = new TopicType();
                 newTopic.setOrder(order++);
                 String url = node.getLINK();
                 if (url != null)
@@ -145,7 +147,7 @@ public class FreemindImporter
         }
     }
 
-    private void setNodePropertiesToTopic( com.wisemapping.xml.mindmap.TopicType mindmapTopic,com.wisemapping.xml.freemind.Node freemindNode)
+    public static void setNodePropertiesToTopic( com.wisemapping.xml.mindmap.TopicType mindmapTopic,com.wisemapping.xml.freemind.Node freemindNode)
     {
         mindmapTopic.setText(freemindNode.getTEXT());
         mindmapTopic.setBgColor(freemindNode.getBACKGROUNDCOLOR());
@@ -164,7 +166,7 @@ public class FreemindImporter
         generateFontStyle(freemindNode,null);
     }
 
-    private String generateFontStyle(Node node,Font font)
+    private static  String generateFontStyle(Node node,Font font)
     {
         /*
         * MindmapFont format : fontName ; size ; color ; bold; italic;
@@ -204,7 +206,7 @@ public class FreemindImporter
         return fontStyle.toString();
     }
 
-    private String fixFontName(Font font)
+    private static String fixFontName(Font font)
     {
         String fontName = com.wisemapping.model.Font.ARIAL.getFontName(); // Default Font
         if (com.wisemapping.model.Font.isValidFont(font.getNAME()))
@@ -214,7 +216,7 @@ public class FreemindImporter
         return fontName;
     }
     
-    private String getShapeFormFromNode(Node node)
+    private static String getShapeFormFromNode(Node node)
     {
         String shape = node.getSTYLE();
         // In freemind a node without style is a line

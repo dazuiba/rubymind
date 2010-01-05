@@ -18,7 +18,7 @@ import com.wisemapping.model.MindMapNative;
 
 public class MMap {
 	public static void main(String[] args) throws Exception {
-
+		
 		String mm = "D:/dev/lib/wise-source//test.mm";
 		String str = readFile(mm);
 		//test1(str);
@@ -39,7 +39,6 @@ public class MMap {
 		FreemindExporter export = new FreemindExporter();
 		byte[] xml = readFile("D:/dev/lib/wise-source//test.mm").getBytes();
 		export.export(xml, System.out);
-		
 	}
 
 	private static void test1(String str) throws Exception {
