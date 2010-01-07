@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<map>
+	<node TEXT="Welcome To WiseMapping" STYLE="line" COLOR="#dfcfe6"
+		BACKGROUND_COLOR="#0a0a08">
+		<font SIZE="10" />
+		<node TEXT="Productivity" STYLE="line" COLOR="#104f11"
+			BACKGROUND_COLOR="#d9b518">
+			<icon BUILTIN="button_ok" />
+			<font SIZE="10" />
+			<node TEXT="Share your ideas" STYLE="line">
+				<icon BUILTIN="idea" />
+			</node>
+			<node TEXT="Brainstorming" STYLE="line" />
+			<node TEXT="Visual " STYLE="line" />
+		</node>
+		<node TEXT="Mind Mapping" STYLE="line" COLOR="#602378"
+			BACKGROUND_COLOR="#edabff">
+			<font SIZE="10" />
+			<node TEXT="Share with Collegues" STYLE="line" />
+			<node TEXT="Online" STYLE="line" />
+			<node TEXT="Anyplace, Anytime" STYLE="line" />
+			<node TEXT="Free!!!" STYLE="line" />
+		</node>
+		<node TEXT="Try it Now!" STYLE="line" COLOR="#ffffff"
+			BACKGROUND_COLOR="#250be3">
+			<font SIZE="10" />
+			<edge COLOR="#080559" />
+			<node TEXT="Double Click" STYLE="line" COLOR="#001be6">
+				<font SIZE="10" ITALIC="true" />
+			</node>
+			<node TEXT="&quot;INS&quot; to insert" STYLE="line" COLOR="#001be6">
+				<font SIZE="10" ITALIC="true" />
+			</node>
+			<node TEXT="Drag map to move" STYLE="line" COLOR="#001be6">
+				<font SIZE="10" ITALIC="true" />
+			</node>
+		</node>
+		<node TEXT="Features" STYLE="line">
+			<node TEXT="Links to Sites" STYLE="line" LINK="www.digg.com">
+				<font SIZE="6" />
+			</node>
+			<node TEXT="Fonts" STYLE="line" />
+			<node TEXT="Topic Color" STYLE="line" />
+			<node TEXT="Topic Shapes" STYLE="line" />
+			<node TEXT="Icons" STYLE="line">
+				<icon BUILTIN="button_ok" />
+			</node>
+			<node TEXT="History Changes" STYLE="line">
+				<icon BUILTIN="button_ok" />
+			</node>
+		</node>
+		<node TEXT="Web 2.0 Tool" STYLE="line" COLOR="#0c1d6b"
+			BACKGROUND_COLOR="#add1f7">
+			<font SIZE="10" />
+			<node TEXT="Colaborated" STYLE="line" />
+			<node TEXT="No plugin required" STYLE="line">
+				<icon BUILTIN="button_ok" />
+			</node>
+			<node TEXT="Share" STYLE="line" />
+			<node TEXT="Easy to use" STYLE="line" />
+		</node>
+	</node>
+</map>

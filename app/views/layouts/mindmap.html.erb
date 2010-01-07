@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <!-- Internet Explorer 8 Hack -->
+    <meta http-equiv="Content-type" value="text/html;charset=UTF-8">
+    <title>WiseMapping - Test </title>
+    <link rel="stylesheet" type="text/css" href="../css/editor.css">
+    <link rel="stylesheet" type="text/css" href="../css/bubble.css">
+    <link rel="stylesheet" type="text/css" href="../css/thirdparty.css">
+
+    <script type="text/javascript" src="../js/engine.js"></script>
+    <script type="text/javascript" src="../js/logerror.js"></script>
+
+    <script type='text/javascript' src='../js/wiseLibrary.js'></script>
+    <script type='text/javascript' src='../js/core.js'></script>
+
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+
+
+
+<div id="editorHeader">
+    <div id="headerToolbar">
+        
+            <div id="headerTitle">Test<span id="headerSubTitle">&nbsp;last modification by dazuiba</span></div>
+        
+        
+            
+                <div id="headerActions">
+
+                    Welcome
+                    , sam
+                    | <a href="/c/mymaps.htm" title="My Wisemaps">
+                    My Wisemaps
+                </a>
+                    | <a href="/c/settings.htm" rel="moodalbox 400px 250px wizard"
+                         title="Do you want to change you user options?. Here is the place.">
+                    Settings
+                </a>
+                    | <a href="/c/logout.htm" title="Logout">
+                    Logout
+                </a>
+
+                </div>
+            
+            
+        
+    </div>
+</div>
+<div id="headerLoading">
+    Loading ...
+</div>
+
+
+<form method="post" id="printForm" name="printForm" action='export.htm' style="height:100%;"
+      target="Test">
+    <input type="hidden" name="action" value="print"/>
+    <input type="hidden" name="mapId" value="14631"/>
+</form>
+
+<div id="waitDialog" style="display:none">
+    <div id="waitingContainer">
+        <div class="loadingIcon"></div>
+        <div class="loadingText">
+            Loading ...
+        </div>
+    </div>
+</div>
+
+<div id="errorDialog" style="display:none">
+    <div id="errorContainer">
+
+        <div class="loadingIcon"></div>
+        <div class="loadingText">
+            An unexpected error has occurred initializing this page. <br/>We'll solve this problem as soon as possible. Please, click <a href="mymaps.htm">here</a> to return to your mindmap list.   
+        </div>
+    </div>
+</div>
+
+<%= yield %>
+</body>
+</html>

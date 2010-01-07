@@ -1,0 +1,26 @@
+== First thing first
+1. 数据库设计
+  请参照db/migrate/ 里面的文件， 一般都已经加好注释了
+
+== Welcome to tWork
+ 
+== How to run this project
+
+1. install rails
+2. cp config/database.example config/database.yml
+3. cd to your project dir and input this: 
+	 ruby script/server
+4. open http://localhost:3000/rs/rs_logs
+
+== code layout
+
+app/
+app/controller/rs/*
+app/views/rs/*
+app/models/report_sys/*
+
+== Others 
+# TODO
+
+== about team members
+#

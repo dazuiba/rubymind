@@ -1,0 +1,199 @@
+.odd {background-color:#f6f7f8;}
+.even {background-color: #fff;}
+
+body { font: 12px/1.5 Tahoma,Helvetica,Arial,'宋体',sans-serif; }
+html, legend { color: #404040; background: #fff; }
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td {margin:0;padding:0;}
+table {border-collapse:collapse;border-spacing:0;}
+fieldset,img {border:none;}
+address,caption,cite,code,dfn,em,strong,th,var {font-style:normal;font-weight:normal;}
+li { list-style: none; }
+caption,th { text-align: left; }
+h1,h2,h3,h4,h5,h6 { font-size: 100%; }
+h1 { font-size: 18px; /* 18px / 12px = 1.5 */ }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+q:before,q:after { content: ''; }
+abbr,acronym { border: none; font-variant: normal; }
+/* to preserve line-height and selector appearance */
+sup { vertical-align: text-top; }
+sub { vertical-align: text-bottom; }
+input,button,textarea,select {font-family: inherit;font-size: inherit;font-weight: inherit;}
+/*to enable resizing for IE*/
+input,button,textarea,select { *font-size: 100%; }
+select, input, button, textarea {font: 100% Tahoma,Helvetica,Arial,sans-serif;}
+table { font-size: inherit; font: 100%; }
+pre, code, kbd, samp, tt{font-family: 'Courier New', Courier, monospace;}
+small { font-size: 100%; }
+/*a:link, a:visited {*/
+a {color: #36c;text-decoration: none;}
+/*a:hover, a:active {*/
+a:hover {color: #f60;text-decoration: underline;}
+abbr,acronym {/* indicating to users that more info is available */border-bottom: 1px dotted;cursor: help;}
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+hr {color: #D1D7DC;background-color: #D1D7DC;border: none;height: 1px;}
+
+/* pagination */
+.page-skip button, .pagination a, .page-start, .page-end{background-image: url(http://assets.taobaocdn.com/img/app/hesper/list_20090420.png);background-repeat: no-repeat;}
+.pagination {height: 22px;font-family: Tahoma;font-size: 12px;}
+.page-top, .page-bottom {float: right;}
+.pagination a, .page-info, .page-prev, .page-cur, .page-start, .page-end, .page-break, .page-skip {float: left;height: 18px;margin: 0 3px 0 0;text-align: center;white-space: nowrap;vertical-align: middle;line-height: 18px;}
+.page-start, .pagination a, .page-end {padding: 0 5px;border: solid 1px #ccc;}
+.page-start {width: 20px;padding: 0!important;background-position: 7px -175px;}
+a.page-prev {width: 20px;padding: 0!important;background-position: -68px -175px!important;}
+.page-cur, .page-break {padding: 0 3px;}
+a.page-next {padding-right: 16px;background-position: -179px -175px!important;}
+.page-end {padding-right: 16px;background-position: -104px -175px;}
+.page-cur {border-color: #fff;color: #ff6400;font-weight: 700;}
+.page-skip {padding: 0 3px;}
+.page-skip input {width: 30px;height: 18px;margin: 0 3px;border: solid 1px #ccc;vertical-align: top;*vertical-align: middle;}
+.page-skip button {width: 37px;height: 19px;margin: 0 0 0 2px;border: 0 none;background-position: -260px -123px;text-indent: -999px;}
+.page-prev span, .page-start span, .page-mini .page-next span, .page-mini .page-end span, .page-skip button span {display: none!important;}
+/* Kill YUI */
+.yui-skin-sam .yui-panel .hd{font-size:100%;}
+.yui-skin-sam .yui-dialog .ft span.default button{width:70px;color:#000;}
+
+/* Main Style */
+em{font-weight:700;}
+input{vertical-align:middle;}
+button{cursor:pointer;}
+.hidden,.none{visibility:hidden;position:absolute;}
+table{table-layout:fixed;*table-layout:auto;}
+td{word-wrap:break-word;word-break:break-all;overflow:hidden;}
+
+.iText{height:18px;padding-top:2px;border:1px #ccc solid;}
+.iBtn{width:80px;height:25px;cursor:pointer;}
+.iCheck{}
+.iTextA{width:700px;height:100px;border:1px #ccc solid;*overflow:hidden;}
+.readonly{border:0;}
+.memberSel .iBtn{width:40px;}
+.handle .cancel{width:50px;}
+
+.oran{color:#F60;}
+.r{color:#f00;}
+.g{color:#093;}
+
+.tip{margin:10px 0;}
+.error{color:red;}
+.handleTop{margin-bottom:10px;}
+.tableList{_height:200px;min-height:200px;margin-bottom:10px;}
+.tableList table{width:100%;}
+.tableList table th,.tableList table td{height:25px;border:1px #ccc solid;text-align:center;}
+.tableList table thead{background:#ccc;}
+.tableList table thead th{font-weight:700;border-color:#fff;}
+.tableList table tr.even{background:#f6f6f6;}
+.other{border-top:1px #eee solid;}
+.pagination{padding:10px 0;}
+
+.dialog .divTr{padding:4px 0;}
+.dialog .iTextA{width:300px;vertical-align:top;}
+.dialog .bd .s1 .iText,.dialog .bd .s2 .iText{width:200px;}
+.dialog .bd .s3 .i1{width:40px;}
+/* mask */
+.iMask{position:fixed;_position:absolute;z-index:1;left:0;top:0;width:100%;height:100%;}
+.iMask iframe{position:absolute;left:0;top:0;width:100%;height:100%;border:none;filter:alpha(opacity=0);}
+.iMask .back{position:absolute;left:0;top:0;width:100%;height:100%;border:none;background:#000;opacity:0.3;filter:alpha(opacity=30);}
+
+/* Main */
+.container{width:950px;margin:0 auto;}
+.header{height:62px;line-height:62px;padding-left:20px;border:1px #f90 solid;border-top:0;position:relative;background:url(/images/header_bg.png) #F90;}
+.header h1{display:inline;line-height:40px;}
+.header h1 a{color:#333;font-family:微软雅黑, 宋体, Arial, Helvetica, sans-serif;}
+.header .info{display:inline;padding-left:30px;}
+.header .wid{width:142px;height:62px;position:absolute;right:0;top:0;text-indent:-9876px;background:url(/images/header_wid.png);}
+.content{_height:450px;min-height:450px;margin-top:10px;border:1px #ccc solid;}
+.footer{padding:10px 0 30px;color:#999;text-align:center;}
+.tab{margin-bottom:10px;}
+.tab ul{padding-left:20px;overflow:hidden;zoom:1;}
+.tab li{float:left;}
+.tab .parent{height:35px;line-height:35px;background:url(/images/tab_bg.png);}
+.tab .parent a{display:block;color:#333;font-size:14px;zoom:1;}
+.tab .parent a:hover{color:#666;}
+.tab .parent li{width:160px;height:30px;line-height:30px;margin-top:5px;text-align:center;}
+.tab .parent li.current{background:url(/images/tab_cur.png) no-repeat;}
+.tab .parent li.current a{font-weight:700;text-decoration:none;}
+.tab .child{padding:10px 0 10px 20px;border-bottom:1px #eee solid;}
+.tab .child li{padding-right:20px;}
+.tab .child a{text-decoration:underline;}
+.content .meat{padding:0 20px 20px;}
+
+.mc-1 .tip{position:relative;}
+.memberBox{width:300px;padding:10px;border:1px #ccc solid;position:absolute;top:30px;left:380px;z-index:10000;background:#fff;}
+.memberBox ul{overflow:hidden;zoom:1;}
+.memberBox li{width:60px;height:20px;line-height:20px;float:left;border-bottom:1px #eee solid;}
+.memberBox li a{display:block;zoom:1;}
+.memberBox li a:hover{background:#f6f6f6;}
+.memberBox li.selected a{color:#CC0000;font-weight:700;text-decoration:line-through;}
+.memberBox .handle{padding:10px 0;text-align:center;}
+.dialog .memberBox{position:absolute;left:60px;top:260px;}
+
+.treeview{width:160px;height:300px;padding:20px 30px 20px 10px;border:2px #ccc solid;position:absolute;left:80px;overflow:auto;overflow-x:hidden;background:#fff;}
+.treeview .m{position:absolute;right:10px;_right:20px;top:5px;}
+
+/* Part */
+.thisWeek{padding-top:10px;}
+.thisWeek h2{height:25px;line-height:25px;font-size:14px;}
+.thisWeek p{padding:5px 0;}
+.ma-person .tableList .s4,.person .tableList .s4{width:350px;}
+.ma-person .tableList tbody .s4,.person .tableList tbody .s4,.ma-person .tableList .s5,.person .tableList .s5{text-align:left;text-indent:10px;}
+.ma-person .tableList .s5,.person .tableList .s5{width:200px;}
+.mp-2 .thisWeek p,.per-2 .thisWeek p{border:1px #eee solid;text-indent:24px;background:#f9f9f9;}
+.mp-3 .meat,.per-3 .meat,.mc-2 .meat,.ms-2 .meat,.ad-2 .meat{padding:0 200px 20px;}
+.ma-check .tableList table,.ma-stat .tableList table{margin-bottom:10px;}
+.ma-check .tableList .s6{width:40px;}
+.ma-check .tableList .s7{width:300px;}
+.ma-check .tableList .s8{width:250px;}
+.ma-check .tableList td.s7,.ma-check .tableList td.s8,.ma-check .tableList tfoot .s2{text-align:left;text-indent:10px;}
+.mc-2 .tip a,.ms-2 .tip a{text-decoration:underline;margin:0 2px;}
+.mc-2 .tip span,.ms-2 .tip span{font-weight:700;}
+.mc-2 .tableList .s1{width:410px;}
+.mc-3 .formZone .divTr{padding:5px 0;}
+.mc-3 .formZone .s1 .iText{width:400px;}
+.mc-3 .formZone .s2 .iTextA{width:400px;vertical-align:top;}
+.mc-3 .formZone .s3 .iSelect{width:200px;}
+.mc-3 .formZone .handle,.ms-3 .handle{margin-top:10px;padding-top:10px;text-indent:60px;border-top:1px #eee solid;}
+.mc-3 .formZone .s5{position:relative;}
+.mc-3 .formZone .s5 .iBtn{width:40px;}
+.mc-3 .formZone .s5 .memberBox{left:200px;}
+.mc-3 .formZone .s5 .memberBox .handle{margin:0;text-indent:0;border:0;}
+.ma-stat .divTr{padding:5px 0;}
+.ma-stat .filter .iText,.ma-stat .filter .iSelect{margin-right:5px;}
+.ma-stat .filter .iCheck{margin-left:5px;}
+.ma-stat .filter .handle{border-bottom:1px #eee solid;}
+.ma-stat .ygtvitem,.ma-stat .ygtvitem table,.ma-stat .ygtvitem td,.ma-stat .ygtvitem td a{height:auto;line-height:inherit;margin:0!important;text-align:left;border:0;}
+.ma-stat .ygtvtable{width:auto;}
+.ma-stat .ygtvitem td{height:22px;line-height:22px;}
+.ms-1 .tableList td.root,.ms-1 .tableList td.root .treeview{width:160px;height:auto;overflow-x:auto;overflow-y:hidden;vertical-align:top;}
+.ms-1 .tableList td.root .treeview{padding:10px;*padding-bottom:20px;border:none;position:static;}
+.ms-1 .filter{position:relative;}
+.ms-1 .filter .s1 p .error{margin-right:10px;}
+.ms-1 .filter .s1 .iText{width:180px;}
+.ms-1 .filter .s2 .s{width:77px;}
+.ms-1 .filter .s3 .l1{margin-right:8px;*margin-right:0;}
+.ms-1 .filter .s3 .l2{margin-right:14px;*margin-right:0;}
+.ms-1 .filter .t1{left:70px;margin-top:-15px;}
+.ms-1 .filter .t2{left:320px;margin-top:-15px;}
+.ms-1 .filter .memberBox{left:250px;top:80px;}
+.ms-3 .iText,.ms-3 .iTextA{width:400px;}
+.ms-3 .s3 .iSelect{width:200px;}
+.ms-3 .s4 .iText,.ms-3 .s5 .iText,.ms-3 .s6 .iText{width:180px;}
+.ms-3 .s7 .iText{width:100px;}
+.ms-3 .meat{position:relative;}
+.ms-3 .meat .memberBox{left:auto;top:auto;}
+.ad-2 .tip{overflow:hidden;zoom:1;}
+.ad-2 .tip .disp{float:left;}
+.ad-2 .tip .search{float:right;}
+.ad-2 .dialog .bd .iText{width:150px;}
+.mc-1 .tableList thead .s2,.mc-1 .tableList tbody .s2{width:30px;}
+.mc-1 .tableList thead .s5,.mc-1 .tableList tbody .s5{width:80px;}
+
+/* Login */
+.login .content{height:400px;}
+.login .content h2{height:30px;line-height:30px;font-size:14px;text-indent:20px;background:#eee;}
+.login .loginBox{width:380px;margin:30px auto 0 auto;padding:20px 0;text-align:center;border:1px #ccc solid;background:#f9f9f9;}
+.login .loginBox .divTr{height:35px;line-height:35px;}
+.login .getpass{padding-top:0;}
+.login .getpass .tip{height:25px;line-height:25px;margin:0 0 10px;background:#FFFFCC;}
+.login .loginBox .handle{margin-top:5px;}

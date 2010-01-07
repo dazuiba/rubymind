@@ -1,0 +1,253 @@
+<script type="text/javascript">
+
+    var waitDialog = new core.WaitDialog();
+    waitDialog.activate(true, $("waitDialog"));
+    $(window).addEvent("error", function(event) {
+
+        // Show error dialog ...
+        waitDialog.changeContent($("errorDialog"), false);
+        return false;
+    });
+
+
+    var mapId = '<%= @mindmap.id %>';
+    var mapXml = '<%= @mindmap.xml %>'
+    var editorProperties = {"zoom":0.7};
+    var isTryMode = false;
+
+    function printMap() {
+        document.printForm.submit();
+    }
+</script>
+
+<div id="colorPalette">
+    <div id="paletteHeader"></div>
+</div>
+
+<div id="fontFamilyPanel" class="toolbarPanel">
+    <div id="times" class="toolbarPanelLink" style="font-family:times;">Times</div>
+    <div id="arial" class="toolbarPanelLink" style="font-family:arial;">Arial</div>
+    <div id="tahoma" class="toolbarPanelLink" style="font-family:tahoma;">Tahoma</div>
+    <div id="verdana" class="toolbarPanelLink" style="font-family:verdana;">Verdana</div>
+
+</div>
+
+<div id="fontSizePanel" class="toolbarPanel">
+    <div id="small" class="toolbarPanelLink" style="font-size:8px">Small</div>
+    <div id="normal" class="toolbarPanelLink" style="font-size:12px">Normal</div>
+    <div id="large" class="toolbarPanelLink" style="font-size:15px">Large</div>
+    <div id="huge" class="toolbarPanelLink" style="font-size:24px">Huge</div>
+</div>
+
+<div id="topicShapePanel" class="toolbarPanel">
+    <!--<div id="automatic" class="toolbarPanelLink">Automatic</div>-->
+    <div id="rectagle" class="toolbarPanelLink"><img src="../images/shape-rectangle.png" alt="Rectangle" width="40px"
+                                                     height="25px"></div>
+    <div id="rounded rectagle" class="toolbarPanelLink"><img src="../images/shape-rectangle-rounded.png"
+                                                             alt="Rounded Rectangle" width="40px" height="25px"></div>
+    <div id="line" class="toolbarPanelLink"><img src="../images/shape-line.png" alt="Line" width="40px" height="7px">
+    </div>
+    <div id="elipse" class="toolbarPanelLink"><img src="../images/shape-elipse.png" alt="Elipse" width="40px"
+                                                   height="25px"></div>
+</div>
+
+<div id="actionsContainer">
+</div>
+
+<div>
+    
+</div>
+
+<div id="toolbar">
+    <div id="editTab" class="tabContent">
+        <div id="file" class="buttonContainer" title="File">
+            <fieldset>
+                <legend>
+                    File
+                </legend>
+                <div id="saveButton" class="button" title="Save">
+
+                    <div class="toolbarLabel"><p>Save</p></div>
+                </div>
+                <div id="discardButton" class="button" title="Close">
+                    <div class="toolbarLabel"><p>Close</p></div>
+                </div>
+                <div id="undoEdition" class="button" title="Undo Edition">
+                    <div class="toolbarLabel"><p>Undo</p></div>
+
+                </div>
+                <div id="redoEdition" class="button" title="Redo Edition">
+                    <div class="toolbarLabel"><p>Redo</p></div>
+                </div>
+                <a id="printAnchor" href="javascript:printMap();" title="Print">
+                    <div id="print" class="button" title="Print">
+                        <div class="toolbarLabel"><p>Print</p></div>
+                    </div>
+
+                </a>
+                <a id="exportAnchor" href="export.htm?mapId=14631" rel="moodalbox 600px 400px"
+                   title="Export this map in the format that you want and start using it in your presentations">
+                    <div id="export" class="button" title="Export">
+                        <div class="toolbarLabel"><p>Export</p></div>
+                    </div>
+                </a>
+            </fieldset>
+        </div>
+
+        <div id="zoom" class="buttonContainer" title="Zoom In">
+            <fieldset>
+                <legend>
+                    Zoom
+                </legend>
+                <div id="zoomIn" class="button" title="Zoom In">
+                    <div class="toolbarLabel"><p>In</p></div>
+                </div>
+                <div id="zoomOut" class="button" title="Zoom Out">
+
+                    <div class="toolbarLabel"><p>Out</p></div>
+                </div>
+            </fieldset>
+        </div>
+        <div id="node" class="buttonContainer" title="Node Properties">
+            <fieldset>
+                <legend>
+                    Topic
+                </legend>
+
+                <div id="topicShape" class="button comboButton" title="Topic Shape">
+                    <div class="toolbarLabel"><p>Shape</p></div>
+                </div>
+                <div id="addTopic" class="button" title="Add Topic">
+                    <div class="toolbarLabel"><p>Add</p></div>
+                </div>
+                <div id="deleteTopic" class="button" title="Delete Topic">
+                    <div class="toolbarLabel"><p>Delete</p></div>
+
+                </div>
+                <div id="topicBorder" class="button comboButton" title="Topic Border Color">
+                    <div class="toolbarLabel"><p>Border</p></div>
+                </div>
+                <div id="topicColor" class="button comboButton" title="Topic Background Color">
+                    <div class="toolbarLabel"><p>Color</p></div>
+                </div>
+                <div id="topicIcon" class="button comboButton" title="Add Icon">
+
+                    <div class="toolbarLabel"><p>Icon</p></div>
+                </div>
+                <div id="topicNote" class="button comboButton" title="Add Note">
+                    <div class="toolbarLabel"><p>Note</p></div>
+                </div>
+                <div id="topicLink" class="button" title="Add Link">
+                    <div class="toolbarLabel"><p>Link</p></div>
+
+                </div>
+            </fieldset>
+        </div>
+        <div id="font" class="buttonContainer" title="Font Properties">
+            <fieldset>
+                <legend>
+                    Font
+                </legend>
+                <div id="fontFamily" class="button comboButton" title="Font Type">
+
+                    <div class="toolbarLabel"><p>Type</p></div>
+                </div>
+                <div id="fontSize" class="button comboButton" title="Font Size">
+                    <div class="toolbarLabel"><p>Size</p></div>
+                </div>
+                <div id="fontBold" class="button" title="Bold">
+                    <div class="toolbarLabel"><p>Bold</p></div>
+
+                </div>
+                <div id="fontItalic" class="button" title="Italic">
+                    <div class="toolbarLabel"><p>Italic</p></div>
+                </div>
+                <div id="fontColor" class="button comboButton" title="Font Color">
+                    <div class="toolbarLabel"><p>Color</p></div>
+                </div>
+            </fieldset>
+
+        </div>
+        <div id="share" class="buttonContainer" title="Share Properties">
+            
+                
+                    <fieldset>
+                        <legend>
+                            Collaboration
+                        </legend>
+                        <a id="tagAnchor" href="tags.htm?mapId=14631" rel="moodalbox 400px 200px wizard"
+                           title="Add tags you maps is very simple. Try!">
+                            <div id="tagIt" class="button" title="Tag">
+                                <div class="toolbarLabel"><p>Tag</p></div>
+
+                            </div>
+                        </a>
+                        
+                            
+                                <a id="shareAnchor" href="mymaps.htm?action=collaborator&amp;userEmail=come2u%40gmail.com&mapId=14631"
+                                   rel="moodalbox 780px 530px wizard" title="Share your maps with your colleagues. Invite them to collaborate with you.">
+                                    <div id="shareIt" class="button" title="Collaboration">
+                                        <div class="toolbarLabel"><p>Share</p></div>
+                                    </div>
+                                </a>
+                                <a id="publishAnchor" href="publish.htm?mapId=14631"
+                                   rel="moodalbox 600px 400px wizard"
+                                   title="What about using your maps in sites and blogs?">
+
+                                    <div id="publishIt" class="button" title="Publish">
+                                        <div class="toolbarLabel"><p>Publish</p></div>
+                                    </div>
+                                </a>
+                            
+                        
+                        <a id="historyAnchor" href="history.htm?action=list&mapId=14631"
+                           rel="moodalbox 600px 400px wizard" title="Looking for an old modification of you map?. Here is the place.">
+                            <div id="history" class="button" title="Looking for an old modification of you map?. Here is the place.">
+                                <div class="toolbarLabel"><p>History</p></div>
+                            </div>
+
+                        </a>
+                    </fieldset>
+                
+                
+            
+        </div>
+    </div>
+</div>
+
+<div id="mindplot"></div>
+
+<div id="footerEditor">
+    <div style="position:absolute; top:0px; width:100%">
+        <a href="/c/home.htm">
+
+            <div id="logo"></div>
+        </a>
+
+        <div id='msgLoggerContainer' class="msgLoggerContainer">
+            <div id="msgStart"></div>
+            <div id='msgLogger'></div>
+            <div id="msgEnd"></div>
+        </div>
+    </div>
+
+    <div id="helpButtonFirstSteps"
+         style="text-align:center; width:90px; height:20px; background-color:#f5f5f5; border: 1px solid #BBB6D6; cursor:pointer; padding-left:5px; margin-left:3px;float:left;">
+        <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:5px;"><img
+                src="../images/help.png"/></div>
+        <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:4px;">First Steps</div>
+    </div>
+    <div id="helpButtonKeyboard"
+         style="text-align:center; width:100px; height:20px; background-color:#f5f5f5; border: 1px solid #BBB6D6; cursor:pointer; padding-left:5px; margin-left:3px;float:left;">
+        <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:5px;"><img
+                src="../images/help.png"/></div>
+        <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:4px;">Shortcuts</div>
+    </div>
+
+</div>
+
+<div id="ffoxworkarround" style="display:none;"><input id="ffoxWorkarroundInput" type="text"></div>
+
+    <script type="text/javascript" src="../js/editservice.js"></script>
+
+<script type="text/javascript" src="../js/editor.js"></script>

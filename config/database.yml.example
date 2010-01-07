@@ -1,0 +1,28 @@
+mysql: &using
+ adapter: mysql
+ host: 192.168.210.22
+ password: auto
+ database: twork_report_sys
+ username: auto
+ encoding: utf8
+development:
+ <<: *using
+production:
+ <<: *using
+test:
+ database: twork_test
+ <<: *using
+qc_admin:
+  adapter: oracle
+  database: qcsite
+  host: ""
+  password: tdtdtd
+  username: qc_db
+  encoding: utf8
+qc_user:
+  adapter: oracle
+  database: qcsite
+  host: ""
+  password: qcuser
+  username: qcuser
+  encoding: utf8

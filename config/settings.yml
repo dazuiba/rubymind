@@ -1,0 +1,145 @@
+# DO NOT MODIFY THIS FILE !!!
+# Settings can be defined through the application in Admin -> Settings
+
+app_title:
+  default: tWork
+app_subtitle:
+  default: Project management
+auto_server_svn_root: 
+  default: /var/www/twork/autotest
+db_bak_dir: 
+  default: /var/www/twork/db_bak
+welcome_text:
+  default:
+login_required:
+  default: 0
+self_registration:
+  default: '2'
+lost_password:
+  default: 1
+attachment_max_size:
+  format: int
+  default: 5120
+issues_export_limit:
+  format: int
+  default: 500
+activity_days_default:
+  format: int
+  default: 30
+per_page_options:
+  default: '25,50,100'
+mail_from:
+  default: zhushi@taobao.net
+bcc_recipients:
+  default: 1
+plain_text_mail:
+  default: 0
+text_formatting:
+  default: textile
+wiki_compression:
+  default: ""
+default_language:
+  default: en
+host_name:
+  default: localhost:3000
+protocol:
+  default: http
+feeds_limit:
+  format: int
+  default: 15
+diff_max_lines_displayed:
+  format: int
+  default: 1500
+enabled_scm:
+  serialized: true
+  default: 
+  - Subversion
+  - Darcs
+  - Mercurial
+  - Cvs
+  - Bazaar
+  - Git
+confirm_results:
+  serialized: true
+  default: 
+  - passed
+  - failed
+reason_infos:
+  serialized: true
+  default:
+  - 
+  - 环境问题
+  - 脚本问题
+  - 页面元素
+  - 其他
+autofetch_changesets:
+  default: 1
+sys_api_enabled:
+  default: 0
+commit_ref_keywords:
+  default: 'refs,references,IssueID'
+commit_fix_keywords:
+  default: 'fixes,closes'
+commit_fix_status_id:
+  format: int
+  default: 0
+commit_fix_done_ratio:
+  default: 100
+# autologin duration in days
+# 0 means autologin is disabled 
+autologin:
+  format: int
+  default: 0
+# date format
+date_format:
+  default: '%Y-%m-%d' 
+time_format:
+  default: '%Y-%m-%d  %H:%M:%S'
+user_format:
+  default: :firstname_lastname
+  format: symbol
+cross_project_issue_relations:
+  default: 0
+notified_events:
+  serialized: true
+  default: 
+  - issue_added
+  - issue_updated
+mail_handler_api_enabled:
+  default: 0
+mail_handler_api_key:
+  default: 
+issue_list_default_columns:
+  serialized: true
+  default: 
+  - tracker
+  - status
+  - priority
+  - subject
+  - assigned_to
+  - updated_on
+display_subprojects_issues:
+  default: 1
+default_projects_public:
+  default: 1
+sequential_project_identifiers:
+  default: 0
+# encodings used to convert repository files content to UTF-8
+# multiple values accepted, comma separated
+repositories_encodings:
+  default: ''
+# encoding used to convert commit logs to UTF-8
+commit_logs_encoding:
+  default: 'UTF-8'
+ui_theme:
+  default: ''
+emails_footer:
+  default: |-
+    You have received this notification because you have either subscribed to it, or are involved in it.
+    To change your notification preferences, please click here: http://hostname/my/account
+gravatar_enabled:  
+  default: 0
+iface_host:
+  default: http://192.168.207.58:8083/ptsystem-1.0/
+iface_weekly_path:
+  default: weekly_report.html

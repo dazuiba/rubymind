@@ -1,0 +1,158 @@
+-- MySQL dump 10.11
+--
+-- Host: 127.0.0.1    Database: twork_report_sys
+-- ------------------------------------------------------
+-- Server version	5.1.36-community
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `mindmap_histories`
+--
+
+DROP TABLE IF EXISTS `mindmap_histories`;
+CREATE TABLE `mindmap_histories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `xml` blob NOT NULL,
+  `mindmap_id` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `mindmap_histories`
+--
+
+LOCK TABLES `mindmap_histories` WRITE;
+/*!40000 ALTER TABLE `mindmap_histories` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mindmap_histories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mindmap_natives`
+--
+
+DROP TABLE IF EXISTS `mindmap_natives`;
+CREATE TABLE `mindmap_natives` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `svg_xml` blob,
+  `vml_xml` blob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `mindmap_natives`
+--
+
+LOCK TABLES `mindmap_natives` WRITE;
+/*!40000 ALTER TABLE `mindmap_natives` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mindmap_natives` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mindmaps`
+--
+
+DROP TABLE IF EXISTS `mindmaps`;
+CREATE TABLE `mindmaps` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `xml` blob NOT NULL,
+  `public` tinyint(1) NOT NULL DEFAULT '0',
+  `native_id` int(11) NOT NULL DEFAULT '0',
+  `created_at` date DEFAULT NULL,
+  `updated_at` date DEFAULT NULL,
+  `owner_id` int(11) NOT NULL,
+  `tags` varchar(1014) DEFAULT NULL,
+  `last_editor` varchar(255) DEFAULT NULL,
+  `created_by_id` varchar(255) DEFAULT NULL,
+  `editor_properties` varchar(512) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `owner_id` (`owner_id`),
+  CONSTRAINT `mindmaps_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `user` (`colaborator_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `mindmaps`
+--
+
+LOCK TABLES `mindmaps` WRITE;
+/*!40000 ALTER TABLE `mindmaps` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mindmaps` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tag`
+--
+
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE `tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `tag_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`colaborator_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tag`
+--
+
+LOCK TABLES `tag` WRITE;
+/*!40000 ALTER TABLE `tag` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(255) DEFAULT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
+  `realname` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `disabled` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `admin` tinyint(4) DEFAULT NULL,
+  `department` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login` (`login`)
+) ENGINE=InnoDB AUTO_INCREMENT=296 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'admin','管理员',NULL,NULL,0,NULL,NULL,NULL,1,NULL),(2,'tiantong','天彤',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(4,'jiangzhongbin.tw','蒋忠斌',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(5,'shilonghua.tw','石龙华',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(9,'yuanping.tw','袁萍',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(11,'linxiangbo.tw','林祥波',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(16,'liyaoyao.tw','李要要',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(17,'boyi','博一',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(18,'yuankan','元坎',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(19,'wenlang','文朗',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(20,'qiwan','绮纨',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(21,'yulin','玉林',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(22,'guoying','帼英',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(23,'luofang','骆方',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(24,'jinghui','敬晖',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(25,'qianya','千丫',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(26,'jingde','敬德',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(27,'bq2442','青青',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(28,'yihuan','一环',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(29,'sunjie.tw','孙洁',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(30,'chenxuan','晨萱',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(31,'baicheng','百城',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(32,'ran.taor','ran.taor',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(33,'qiuxu','丘虚',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(34,'weiqiuhua.tw','魏秋华',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(35,'yuanhua','元化',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(36,'bichai','碧钗',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(37,'zhilan','芷兰',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(38,'zhendong','振东',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(39,'tongzhan','童战',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(40,'zhenyu','振羽',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(41,'xiuyun','绣云',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(42,'ailing','爱菱',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(43,'cyasunny','青云',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(44,'liuzhi.tw','刘志',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(45,'zhushi','柱石',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(46,'fangsheng','方生',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(47,'songque','宋缺',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(48,'kangliang.tw','康亮',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(49,'caishuang','采霜',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(50,'qingling','青灵',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(51,'heyiping.tw','何一平',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(52,'dumiao','独妙',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(53,'suqing','苏青',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(54,'lingyi','灵漪',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(55,'ruoping','若苹',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(56,'huangfu','皇甫',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(57,'xiangyang','向阳',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(58,'2887-wb','2887-wb',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(59,'lihua.tw','李花',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(60,'3238-wb','3238-wb',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(61,'yuntian','云天',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(62,'luoqing','罗青',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(63,'lilingna.tw','李玲娜',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(64,'caiyu','彩玉',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(65,'guoxiaotao.tw','郭小涛',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(66,'danian','大年',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(67,'xln1627','郭芙',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(68,'lingfeng.nilf','lingfeng.nilf',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(69,'kuier','葵儿',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(70,'hanxuan','韩璇',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(71,'allan.huangxr','宝驹',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(72,'meizhu','美珠',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(73,'ludan','鹿丹',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(74,'shenliqing.tw','沈利清',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(75,'shizhong','士忠',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(76,'mufeng','沐风',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(77,'jingbang.yangjb','jingbang.yangjb',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(78,'zhoubingxin.tw','周冰心',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(79,'feihua','飞花',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(80,'huizhen','慧真',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(81,'catalpa.huz','自在',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(82,'miaoyu','妙雨',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(83,'guangyuan','光远',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(84,'luozhongtao.tw','罗中涛',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(85,'hanpan.tw','韩盘',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(86,'will.zhangw','云齐',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(87,'qiongxiang','琼香',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(88,'shuchi','术赤',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(89,'lixiaoqin.tw','李小琴',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(90,'minyi','敏仪',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(91,'sanglin.tw','桑琳',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(92,'yangjin.zhangyj','yangjin.zhangyj',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(93,'sangjianfeng.tw','桑建峰',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(94,'zhaowenjing.tw','赵文静',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(95,'houfeng','侯风',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(96,'jige','季哥',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(97,'xiayang','夏阳',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(98,'yewei.tw','冶伟',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(99,'xiehui.tw','解辉',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(100,'xiying','汐影',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(101,'zhongrong','仲容',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(102,'hukui','胡魁',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(103,'guxin.tw','顾欣',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(104,'rongjiao','荣姣',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(105,'wanglei.tw','王蕾',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(106,'buer','不二',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(107,'yexue','夜雪',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(108,'mazhan','马展',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(109,'yangfei.tw','杨飞',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(110,'heshuangshuang.pt','何霜霜',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(111,'wuhua','无花',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(112,'zhixuan','志玄',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(113,'huijing','慧净',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(114,'lanxiang','兰香',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(115,'junliang','均量',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(116,'yujie.liuyj','幽若',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(117,'wb-xial','wb-xial',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(118,'fanshen','范慎',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(119,'wb-liumei','wb-liumei',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(120,'hanlin.tw','韩琳',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(121,'mengkang','mengkang',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(122,'wb-xuwt','wb-xuwt',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(123,'dinghui','定慧',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(124,'chuanying','传鹰',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(125,'chunhong.songch','云碧',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(126,'wuqingfei.tw','吴情飞',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(127,'xingxuan','星璇',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(128,'shenjie.tw','沈洁',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(129,'xuanzhen','玄震',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(130,'qinde','钦德',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(131,'guizhen','归真',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(132,'lingyun','灵云',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(133,'butai','不台',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(134,'zhuting','朱停',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(135,'yaoguang','瑶光',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(136,'jiaoxing','jiaoxing',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(137,'zixian','姿仙',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(138,'wb-hanyq','wb-hanyq',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(139,'benyin','本因',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(140,'pingyan','苹烟',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(141,'yunan','云安',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(142,'hu.weih','空望',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(143,'hua.liulh','hua.liulh',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(144,'qingfei','清妃',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(145,'yanyue','掩月',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(146,'wb-chenhp','wb-chenhp',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(147,'xuzhongyuan.tw','徐中原',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(148,'wb-likun','wb-likun',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(149,'yuanchao','元超',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(150,'jessie.maoj','非烟',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(151,'suntingting.tw','孙婷婷',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(152,'wenguang','文广',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(153,'sansheng','三胜',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(154,'chenbaoan.tw','陈保安',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(155,'dufu','杜复',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(156,'xinjie.houxj','xinjie.houxj',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(157,'lanjun','兰君',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(158,'wb-zhuy','wb-zhuy',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(159,'jie.chenxj','jie.chenxj',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(160,'wb-meij','wb-meij',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(161,'wb-liqf','wb-liqf',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(162,'xuchu','虚厨',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(163,'tanjun.pt','谭峻',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(164,'shitou','石头',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(165,'maoshijie.pt','毛世杰',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(166,'jiangyongyuan.tw','江永源',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(167,'yingyang','英扬',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(168,'yuanchuo','元绰',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(169,'wb-wuxh','wb-wuxh',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(170,'xiahouying','xiahouying',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(171,'qinguang','秦广',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(172,'ruowang','若望',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(173,'xianglingzhi.pt','项灵芝',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(174,'wb-hanzh','wb-hanzh',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(175,'zhenhai','振海',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(176,'yingqi','英奇',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(177,'jiantian','见田',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(178,'agui','agui',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(179,'ziming.tw','资明',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(180,'dahai','达海',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(181,'xuyishun.tw','徐益顺',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(182,'ryan.luyn','铁花',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(183,'nanfei','南飞',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(184,'fengchi','凤池',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(185,'lingce','令策',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(186,'daixiuying.tw','戴秀英',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(187,'yanggang.tw','杨刚',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(188,'xiatongbing.tw','夏同兵',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(189,'wb-liuwc','wb-liuwc',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(190,'qing.liq','qing.liq',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(191,'zixi','自惜',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(192,'yuanchong','元冲',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(193,'tufang','屠方',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(194,'yunmeng','云梦',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(195,'wushi','悟石',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(196,'baiyunsheng','baiyunsheng',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(197,'wb-jinjuan','wb-jinjuan',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(198,'shiang','史昂',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(199,'tizi','tizi',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(200,'wb-zhengy','wb-zhengy',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL),(257,'zhouhualing','周华玲',NULL,NULL,0,'2009-10-22 11:14:57','2009-10-22 11:14:57',NULL,NULL,NULL),(259,'huadanping','华丹萍',NULL,NULL,0,'2009-10-22 11:21:21','2009-10-22 11:21:21',NULL,NULL,NULL),(260,'qing','青',NULL,NULL,0,'2009-10-22 11:23:28','2009-10-22 11:23:28',NULL,NULL,NULL),(262,'renfang','任芳',NULL,NULL,0,'2009-10-22 11:33:16','2009-10-22 11:33:16',NULL,NULL,NULL),(269,'chunchun','纯纯',NULL,NULL,0,'2009-10-23 01:25:14','2009-10-23 01:25:14',NULL,NULL,NULL),(275,'chenyong','陈勇',NULL,NULL,0,'2009-10-23 01:25:23','2009-10-23 01:25:23',NULL,NULL,NULL),(278,'juying','居盈',NULL,NULL,0,'2009-10-23 02:26:29','2009-10-23 02:26:29',NULL,NULL,NULL),(279,'zhaolei','赵磊',NULL,NULL,0,'2009-10-23 02:26:35','2009-10-23 02:26:35',NULL,NULL,NULL),(288,'zhaoyanli','刘艳丽',NULL,NULL,0,'2009-10-23 05:44:22','2009-10-23 05:44:22',NULL,NULL,NULL),(295,'pengxiangyan','彭祥颜',NULL,NULL,0,'2009-10-23 06:01:48','2009-10-23 06:01:48',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2010-01-07 17:02:33

@@ -1,0 +1,341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <!-- Internet Explorer 8 Hack -->
+    <meta http-equiv="Content-type" value="text/html;charset=UTF-8">
+    <title>WiseMapping - Test </title>
+    <link rel="stylesheet" type="text/css" href="../css/editor.css">
+    <link rel="stylesheet" type="text/css" href="../css/bubble.css">
+    <link rel="stylesheet" type="text/css" href="../css/thirdparty.css">
+
+    <script type="text/javascript" src="../js/engine.js"></script>
+    <script type="text/javascript" src="http://www.wisemapping.com/dwr/interface/LoggerService.js"></script>
+
+    <script type='text/javascript' src='../js/wiseLibrary.js'></script>
+    <script type='text/javascript' src='../js/core.js'></script>
+
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+
+
+
+<div id="editorHeader">
+    <div id="headerToolbar">
+        
+            <div id="headerTitle">Test<span id="headerSubTitle">&nbsp;last modification by dazuiba</span></div>
+        
+        
+            
+                <div id="headerActions">
+
+                    Welcome
+                    , sam
+                    | <a href="/c/mymaps.htm" title="My Wisemaps">
+                    My Wisemaps
+                </a>
+                    | <a href="/c/settings.htm" rel="moodalbox 400px 250px wizard"
+                         title="Do you want to change you user options?. Here is the place.">
+                    Settings
+                </a>
+                    | <a href="/c/logout.htm" title="Logout">
+                    Logout
+                </a>
+
+                </div>
+            
+            
+        
+    </div>
+</div>
+<div id="headerLoading">
+    Loading ...
+</div>
+
+
+<form method="post" id="printForm" name="printForm" action='export.htm' style="height:100%;"
+      target="Test">
+    <input type="hidden" name="action" value="print"/>
+    <input type="hidden" name="mapId" value="14631"/>
+</form>
+
+<div id="waitDialog" style="display:none">
+    <div id="waitingContainer">
+        <div class="loadingIcon"></div>
+        <div class="loadingText">
+            Loading ...
+        </div>
+    </div>
+</div>
+
+<div id="errorDialog" style="display:none">
+    <div id="errorContainer">
+
+        <div class="loadingIcon"></div>
+        <div class="loadingText">
+            An unexpected error has occurred initializing this page. <br/>We'll solve this problem as soon as possible. Please, click <a href="mymaps.htm">here</a> to return to your mindmap list.   
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var waitDialog = new core.WaitDialog();
+    waitDialog.activate(true, $("waitDialog"));
+    $(window).addEvent("error", function(event) {
+
+        // Show error dialog ...
+        waitDialog.changeContent($("errorDialog"), false);
+        return false;
+    });
+
+
+    var mapId = '14631';
+    // var mapXml = '<%=@mind_map.mm_xml.gsub("\n","")%>';
+    var mapXml = '<map name="17988"><topic central="true" text="TDMP PLAN" shape="rounded rectagle"><topic position="303,0" text="&#x6027;&#x80fd;&#x4e2d;&#x5fc3;" shape="line"><link url="www.google.com"/></topic><topic position="300,-50" text="??????????????????" shape="line"><icon id="bullet_black"/><icon id="bullet_black"/><icon id="bullet_black"/><icon id="bullet_black"/><icon id="bullet_black"/><icon id="bullet_black"/><icon id="bullet_black"/><topic order="0" text="????????????????????????" shape="line"/><topic order="1" text="?????????/????????????(????????????)" shape="line"/><topic order="2" text="????????????????????????(????????????)" shape="line"/><topic order="3" text="QC??????" shape="line"/></topic><topic position="-171,50" text="??????" shape="line"><topic order="0" text="????????????????????????" shape="line"/><topic order="1" text="????????????????????????" shape="line"/><topic order="2" text="????????????????????????" shape="line"/><topic order="3" text="????????????????????????" shape="line"><icon id="bullet_green"/><icon id="bullet_green"/><icon id="bullet_green"/><icon id="bullet_green"/></topic><topic order="4" text="??????????????????(???????????????????????????)" shape="line"/></topic><topic position="-174,-100" text="coding" shape="line"><icon id="onoff_add"/><icon id="bulb_light_off"/><topic order="0" text="?????????????????????()" shape="line"><icon id="face_smile"/><icon id="face_smile"/><icon id="face_smile"/><icon id="face_smile"/><icon id="face_smile"/><icon id="face_smile"/><topic order="0" text="??????????????????(??????????????????5?????????,6????????????)" shape="line"/><topic order="1" text="??????????????????" shape="line"/><topic order="2" text="????????????????????????(WEB)" shape="line"/></topic><topic order="1" text="???????????????" shape="line"><topic order="0" text="Q2??????4?????????????????????(Q2)" shape="line"/><topic order="1" text="??????QTP???ruby??????" shape="line"/></topic></topic><topic position="-151,100" text="??????" shape="line"><topic order="0" text="????????????????????????" shape="line"/><topic order="1" text="????????????????????????(??????????????????)" shape="line"/></topic><topic position="279,-150" text="????????????" shape="line"><topic order="0" text="??????????????????(5?????????????????????)" shape="line"/><topic order="1" text="????????????(Q3?????? ??????)" shape="line"/><topic order="2" text="??????????????????" shape="line"/></topic><topic position="314,150" text="??????????????????" shape="line"><icon id="bullet_orange"/></topic></topic></map>';
+    
+    var mapXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><map><node TEXT="tttttt" STYLE="line"><node TEXT="fdfd" STYLE="line"/><node TEXT="fdfdfd" STYLE="line"/><node TEXT="fdfdf" STYLE="line"/><node TEXT="fdfdfd" STYLE="line"/></node></map>'
+    var editorProperties = {"zoom":0.7};
+    var isTryMode = false;
+
+    function printMap() {
+        document.printForm.submit();
+    }
+</script>
+
+<div id="colorPalette">
+    <div id="paletteHeader"></div>
+</div>
+
+<div id="fontFamilyPanel" class="toolbarPanel">
+    <div id="times" class="toolbarPanelLink" style="font-family:times;">Times</div>
+    <div id="arial" class="toolbarPanelLink" style="font-family:arial;">Arial</div>
+    <div id="tahoma" class="toolbarPanelLink" style="font-family:tahoma;">Tahoma</div>
+    <div id="verdana" class="toolbarPanelLink" style="font-family:verdana;">Verdana</div>
+
+</div>
+
+<div id="fontSizePanel" class="toolbarPanel">
+    <div id="small" class="toolbarPanelLink" style="font-size:8px">Small</div>
+    <div id="normal" class="toolbarPanelLink" style="font-size:12px">Normal</div>
+    <div id="large" class="toolbarPanelLink" style="font-size:15px">Large</div>
+    <div id="huge" class="toolbarPanelLink" style="font-size:24px">Huge</div>
+</div>
+
+<div id="topicShapePanel" class="toolbarPanel">
+    <!--<div id="automatic" class="toolbarPanelLink">Automatic</div>-->
+    <div id="rectagle" class="toolbarPanelLink"><img src="../images/shape-rectangle.png" alt="Rectangle" width="40px"
+                                                     height="25px"></div>
+    <div id="rounded rectagle" class="toolbarPanelLink"><img src="../images/shape-rectangle-rounded.png"
+                                                             alt="Rounded Rectangle" width="40px" height="25px"></div>
+    <div id="line" class="toolbarPanelLink"><img src="../images/shape-line.png" alt="Line" width="40px" height="7px">
+    </div>
+    <div id="elipse" class="toolbarPanelLink"><img src="../images/shape-elipse.png" alt="Elipse" width="40px"
+                                                   height="25px"></div>
+</div>
+
+<div id="actionsContainer">
+</div>
+
+<div>
+    
+</div>
+
+<div id="toolbar">
+    <div id="editTab" class="tabContent">
+        <div id="file" class="buttonContainer" title="File">
+            <fieldset>
+                <legend>
+                    File
+                </legend>
+                <div id="saveButton" class="button" title="Save">
+
+                    <div class="toolbarLabel"><p>Save</p></div>
+                </div>
+                <div id="discardButton" class="button" title="Close">
+                    <div class="toolbarLabel"><p>Close</p></div>
+                </div>
+                <div id="undoEdition" class="button" title="Undo Edition">
+                    <div class="toolbarLabel"><p>Undo</p></div>
+
+                </div>
+                <div id="redoEdition" class="button" title="Redo Edition">
+                    <div class="toolbarLabel"><p>Redo</p></div>
+                </div>
+                <a id="printAnchor" href="javascript:printMap();" title="Print">
+                    <div id="print" class="button" title="Print">
+                        <div class="toolbarLabel"><p>Print</p></div>
+                    </div>
+
+                </a>
+                <a id="exportAnchor" href="export.htm?mapId=14631" rel="moodalbox 600px 400px"
+                   title="Export this map in the format that you want and start using it in your presentations">
+                    <div id="export" class="button" title="Export">
+                        <div class="toolbarLabel"><p>Export</p></div>
+                    </div>
+                </a>
+            </fieldset>
+        </div>
+
+        <div id="zoom" class="buttonContainer" title="Zoom In">
+            <fieldset>
+                <legend>
+                    Zoom
+                </legend>
+                <div id="zoomIn" class="button" title="Zoom In">
+                    <div class="toolbarLabel"><p>In</p></div>
+                </div>
+                <div id="zoomOut" class="button" title="Zoom Out">
+
+                    <div class="toolbarLabel"><p>Out</p></div>
+                </div>
+            </fieldset>
+        </div>
+        <div id="node" class="buttonContainer" title="Node Properties">
+            <fieldset>
+                <legend>
+                    Topic
+                </legend>
+
+                <div id="topicShape" class="button comboButton" title="Topic Shape">
+                    <div class="toolbarLabel"><p>Shape</p></div>
+                </div>
+                <div id="addTopic" class="button" title="Add Topic">
+                    <div class="toolbarLabel"><p>Add</p></div>
+                </div>
+                <div id="deleteTopic" class="button" title="Delete Topic">
+                    <div class="toolbarLabel"><p>Delete</p></div>
+
+                </div>
+                <div id="topicBorder" class="button comboButton" title="Topic Border Color">
+                    <div class="toolbarLabel"><p>Border</p></div>
+                </div>
+                <div id="topicColor" class="button comboButton" title="Topic Background Color">
+                    <div class="toolbarLabel"><p>Color</p></div>
+                </div>
+                <div id="topicIcon" class="button comboButton" title="Add Icon">
+
+                    <div class="toolbarLabel"><p>Icon</p></div>
+                </div>
+                <div id="topicNote" class="button comboButton" title="Add Note">
+                    <div class="toolbarLabel"><p>Note</p></div>
+                </div>
+                <div id="topicLink" class="button" title="Add Link">
+                    <div class="toolbarLabel"><p>Link</p></div>
+
+                </div>
+            </fieldset>
+        </div>
+        <div id="font" class="buttonContainer" title="Font Properties">
+            <fieldset>
+                <legend>
+                    Font
+                </legend>
+                <div id="fontFamily" class="button comboButton" title="Font Type">
+
+                    <div class="toolbarLabel"><p>Type</p></div>
+                </div>
+                <div id="fontSize" class="button comboButton" title="Font Size">
+                    <div class="toolbarLabel"><p>Size</p></div>
+                </div>
+                <div id="fontBold" class="button" title="Bold">
+                    <div class="toolbarLabel"><p>Bold</p></div>
+
+                </div>
+                <div id="fontItalic" class="button" title="Italic">
+                    <div class="toolbarLabel"><p>Italic</p></div>
+                </div>
+                <div id="fontColor" class="button comboButton" title="Font Color">
+                    <div class="toolbarLabel"><p>Color</p></div>
+                </div>
+            </fieldset>
+
+        </div>
+        <div id="share" class="buttonContainer" title="Share Properties">
+            
+                
+                    <fieldset>
+                        <legend>
+                            Collaboration
+                        </legend>
+                        <a id="tagAnchor" href="tags.htm?mapId=14631" rel="moodalbox 400px 200px wizard"
+                           title="Add tags you maps is very simple. Try!">
+                            <div id="tagIt" class="button" title="Tag">
+                                <div class="toolbarLabel"><p>Tag</p></div>
+
+                            </div>
+                        </a>
+                        
+                            
+                                <a id="shareAnchor" href="mymaps.htm?action=collaborator&amp;userEmail=come2u%40gmail.com&mapId=14631"
+                                   rel="moodalbox 780px 530px wizard" title="Share your maps with your colleagues. Invite them to collaborate with you.">
+                                    <div id="shareIt" class="button" title="Collaboration">
+                                        <div class="toolbarLabel"><p>Share</p></div>
+                                    </div>
+                                </a>
+                                <a id="publishAnchor" href="publish.htm?mapId=14631"
+                                   rel="moodalbox 600px 400px wizard"
+                                   title="What about using your maps in sites and blogs?">
+
+                                    <div id="publishIt" class="button" title="Publish">
+                                        <div class="toolbarLabel"><p>Publish</p></div>
+                                    </div>
+                                </a>
+                            
+                        
+                        <a id="historyAnchor" href="history.htm?action=list&mapId=14631"
+                           rel="moodalbox 600px 400px wizard" title="Looking for an old modification of you map?. Here is the place.">
+                            <div id="history" class="button" title="Looking for an old modification of you map?. Here is the place.">
+                                <div class="toolbarLabel"><p>History</p></div>
+                            </div>
+
+                        </a>
+                    </fieldset>
+                
+                
+            
+        </div>
+    </div>
+</div>
+
+<div id="mindplot"></div>
+
+<div id="footerEditor">
+    <div style="position:absolute; top:0px; width:100%">
+        <a href="/c/home.htm">
+
+            <div id="logo"></div>
+        </a>
+
+        <div id='msgLoggerContainer' class="msgLoggerContainer">
+            <div id="msgStart"></div>
+            <div id='msgLogger'></div>
+            <div id="msgEnd"></div>
+        </div>
+    </div>
+
+    <div id="helpButtonFirstSteps"
+         style="text-align:center; width:90px; height:20px; background-color:#f5f5f5; border: 1px solid #BBB6D6; cursor:pointer; padding-left:5px; margin-left:3px;float:left;">
+        <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:5px;"><img
+                src="../images/help.png"/></div>
+        <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:4px;">First Steps</div>
+    </div>
+    <div id="helpButtonKeyboard"
+         style="text-align:center; width:100px; height:20px; background-color:#f5f5f5; border: 1px solid #BBB6D6; cursor:pointer; padding-left:5px; margin-left:3px;float:left;">
+        <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:5px;"><img
+                src="../images/help.png"/></div>
+        <div style="float:left; position:relative; top:50%; margin-top:-8px; margin-left:4px;">Shortcuts</div>
+    </div>
+
+</div>
+
+<div id="ffoxworkarround" style="display:none;"><input id="ffoxWorkarroundInput" type="text"></div>
+
+    <script type="text/javascript" src="http://www.wisemapping.com/dwr/interface/MapEditorService.js"></script>
+
+<script type="text/javascript" src="../js/editor.js"></script>
+</body>
+</html>

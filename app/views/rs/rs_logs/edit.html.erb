@@ -1,0 +1,12 @@
+<h1>Editing rs_log</h1>
+
+<% form_for(@rs_log) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @rs_log %> |
+<%= link_to 'Back', rs_logs_path %>

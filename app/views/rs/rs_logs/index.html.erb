@@ -1,0 +1,90 @@
+<%= link_to "历史", :action => "show" %>
+<hr/>
+<% form_tag  "/rs/rs_logs/create" do -%>
+    <table width ="900">
+      <tr>
+        <td width ="7%">类型</td>
+        <td width ="20%">名称</td>
+        <td width ="7%">阶段</td>
+        <td width ="10%">时间(投入)</td>
+        <td width ="30%">产出</td>
+      </tr>    
+	  <% @qc.each do |project, clazz| %>
+      <% rs_log = RsLog.find_or_initialize_by_item_id_and_daily_log_id_and_output_type(project["id"],@daily_log.id,project["output_type"]) %>
+      <tr class= <%= clazz %> >
+        <td>null</td>
+	    <td><%= project["name"] %></td>
+	    <td>未设置</td>
+      	<td><input type="text"  name="rs_log[input][]" size="10" value=<%= rs_log.input %> ></td>
+		<td><input type="text"  name="rs_log[output][]" size="60" value=<%= project["output_type_name"] %><%= project["output"] %> ></td>
+        <td><input type="hidden" name="rs_log[output_type][]" value=<%= project["output_type"] %> /></td>
+        <td><input type="hidden" name="rs_log[daily_log_id][]" value=<%= @daily_log.id %> ></td>
+        <td><input type="hidden" name="user_id[]" value=<%= @daily_log.user_id %> /></td>
+        <td><input type="hidden" name="rs_log[item_id][]" value=<%= project["id"] %> /></td>
+        <td><input type="hidden" name="rs_log[item_type][]" value=<%= project["type"] %> /></td>
+	  </tr>      
+      <% end %>
+      <tbody id="mainbody">
+      </tbody>
+    </table>
+    <br/>
+    <br/>
+    <p>备注：</p>
+    <textarea name="daily_log[comments]" rows="10" columns="10" cols="60" ><%= @daily_log.comments %>
+    </textarea>
+    <br/>
+    <br/>
+    <%= submit_tag "保存" %> | <input type="button" value="增加行" onclick="addCell()"/>
+<% end %>
+<br />
+<script type="text/javascript">
+  function addCell(){
+   var cell = document.createElement("tr");
+   var row1 = document.createElement("td");
+   var row2 = document.createElement("td");
+   var row3 = document.createElement("td");
+   var row4 = document.createElement("td");
+   var row5 = document.createElement("td");
+   var text1 = document.createElement("select");
+   text1.setAttribute("name", "rs_log_e[item_type][]");
+   var option1 = document.createElement("option");
+   option1.setAttribute("value", "1");
+   var optext1 = document.createTextNode("项目");
+   var option2 = document.createElement("option");
+   option2.setAttribute("value", "2");
+   var optext2 = document.createTextNode("日常");
+   var option3 = document.createElement("option");
+   option3.setAttribute("value", "3");
+   var optext3 = document.createTextNode("其它");
+   //text1.appendChild(option1);
+   //option1.appendChild(optext1);
+   //text1.appendChild(option2);
+   //option2.appendChild(optext2);
+   text1.appendChild(option3);
+   option3.appendChild(optext3);
+   var text2 = document.createElement("input");
+   text2.setAttribute("name", "rs_log_e[item_name][]");
+   text2.setAttribute("size","30")
+   var text3 = document.createElement("input");
+   text3.setAttribute("name", "rs_log_e[stat][]");
+   text3.setAttribute("size","10")
+   var text4 = document.createElement("input");
+   text4.setAttribute("name", "rs_log_e[input][]");
+   text4.setAttribute("size","10")
+   var text5 = document.createElement("input");
+   text5.setAttribute("name", "rs_log_e[output][]");
+   text5.setAttribute("size","60")
+   row1.appendChild(text1);
+   row2.appendChild(text2);
+   row3.appendChild(text3);
+   row4.appendChild(text4);
+   row5.appendChild(text5);
+   cell.appendChild(row1);
+   cell.appendChild(row2);
+   cell.appendChild(row3);
+   cell.appendChild(row4);
+   cell.appendChild(row5);
+   var mainbody = document.getElementById("mainbody");
+   mainbody.appendChild(cell);
+  }
+</script>
