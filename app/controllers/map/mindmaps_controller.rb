@@ -3,10 +3,14 @@ class Map::MindmapsController < ApplicationController
 	before_filter :find_obj, :only => [:update, :save, :destroy, :show]	
 	before_filter :set_my_menu, :except => [:index]
 	def new
-		map = Map::Mindmap.create(:owner => User.current,
-																	 :created_by => User.current,
-																	 :title  => params[:title]||"Subject")
-		redirect_to :action => "show", :id => map
+		@mindmap= Map::Mindmap.new
+		render :layout=>!request.xhr?
+	end
+	
+	def create
+		map = Map::Mindmap.create(params[:map_mindmap].merge(:owner => User.current,
+																												 :created_by => User.current))
+		redirect_to :action => "my"
 	end
   
   def index
@@ -18,7 +22,11 @@ class Map::MindmapsController < ApplicationController
   end
   
   def my
-  	
+  	@mindmaps = Map::Mindmap.scoped_by_owner_id(User.current.id)
+  end
+  
+  def show
+  	render :layout => "editor"
   end
   
   def export  	

@@ -1,0 +1,19 @@
+<div>
+	<%= link_to_popup "新建", :action => "new" %>|
+	<%= link_to_popup "导入", :action => "import" %>
+</div>
+
+<% table @mindmaps, ["名称", "内容描述", "操作"] do|map, clazz|%>
+	<tr class='<%= clazz %>'>
+		<td>
+			<%= link_to map.title, "/map/show/#{map.id}", :onclick => "return popup(this, 'editor');"%>
+		</td>
+		<td>
+			<%= map.description %>
+		</td>
+		<td>
+			<%= link_to "锁定", :action => "lock", :id=>map %>|
+			<%= link_to "历史版本", :action => "history", :id=>map %>
+		</td>
+	</tr>
+<% end %>

@@ -1,0 +1,7 @@
+<h3>新建Mind Map<h3/>
+<% form_for @mindmap, :url=>{:action => "create"} do|f| %>
+	<p>名称：<%= f.text_field "title" %><p/>
+	<p>描述：<%= f.text_area "description" %></p>
+	<%= submit_tag "Submit" %>
+<% end %>
+	
