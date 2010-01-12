@@ -1,0 +1,8 @@
+<h3>导入Mind Map<h3/>
+<% form_for @mindmap, :url=>{:action => "import"}, :html => {:multipart => true} do|f| %>
+	<p>名称：<%= f.text_field "title" %><p/>
+	<p>描述：<%= f.text_area "description" %></p>
+	<p>文件：<%= file_field_tag "mm_file" %></p>
+	<%= submit_tag "Submit" %>
+<% end %>
+	

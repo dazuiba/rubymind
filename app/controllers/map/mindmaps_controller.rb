@@ -8,8 +8,7 @@ class Map::MindmapsController < ApplicationController
 	end
 	
 	def create
-		map = Map::Mindmap.create(params[:map_mindmap].merge(:owner => User.current,
-																												 :created_by => User.current))
+		map = Map::Mindmap.create(params[:map_mindmap])
 		redirect_to :action => "my"
 	end
   
@@ -18,7 +17,14 @@ class Map::MindmapsController < ApplicationController
   end
   
   def import
-  		
+		if request.get?
+			@mindmap = Map::Mindmap.new
+		else
+			@mindmap = Map::Mindmap.new(params[:map_mindmap])
+			@mindmap.import!(params[:mm_file].read)
+			return redirect_to "/map/show/#{@mindmap.id}"
+		end
+		render :layout=>!request.xhr?
   end
   
   def my

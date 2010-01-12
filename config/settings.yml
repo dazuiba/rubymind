@@ -10,7 +10,7 @@ auto_server_svn_root:
 db_bak_dir: 
   default: /var/www/twork/db_bak
 map_ws:
- default: http://localhost:8080/mmap
+ default: http://localhost:8080/
 welcome_text:
   default:
 login_required:

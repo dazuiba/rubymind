@@ -41,13 +41,24 @@ public class WebServer {
     }
     
     public String index() throws FileNotFoundException {
-       return  withLayout("<form method=post action='mmap'>"+
+       return  withLayout("<form method=post action='mm2xml'>"+
     			"请粘贴mmap：<p><textarea  name='mmap' rows='30' cols='80'></textarea><p>"+
     			"<input type='submit'>"+
     		    "</form>");
     }
 
-    public ResponseState mmap(RequestState state) throws Exception {
+    public ResponseState mm2xml(RequestState state) throws Exception {
+        Map params = state.getRequestArgs();
+        String mmapStr =(String)params.get("mmxml");
+        ResponseState result = new ResponseState();
+        result.setMimeType("text/xml");
+        byte[] bytes = Tools.mm_2_xml(new ByteArrayInputStream(mmapStr.getBytes()) ).toByteArray();
+        result.setBody(new ByteArrayInputStream(bytes));
+        System.out.println(((List)result.getBody()).get(0).getClass());
+        return result;
+    } 
+    
+    public ResponseState xml2mm(RequestState state) throws Exception {
         Map params = state.getRequestArgs();
         String mmapStr =(String)params.get("mmap");
         ResponseState result = new ResponseState();
@@ -57,6 +68,7 @@ public class WebServer {
         System.out.println(((List)result.getBody()).get(0).getClass());
         return result;
     } 
+    
     
     private String withLayout(String body){
 		return template.replaceFirst("HTML_BODY", body);
