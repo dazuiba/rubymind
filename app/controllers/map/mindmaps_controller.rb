@@ -1,7 +1,7 @@
 class Map::MindmapsController < ApplicationController
 	layout "mindmap"
-	before_filter :find_obj, :except => [:new,:index, :list, :mmtree, :create]	
-	
+	before_filter :find_obj, :only => [:update, :save, :destroy, :show]	
+	before_filter :set_my_menu, :except => [:index]
 	def new
 		map = Map::Mindmap.create(:owner => User.current,
 																	 :created_by => User.current,
@@ -17,7 +17,9 @@ class Map::MindmapsController < ApplicationController
   		
   end
   
-  
+  def my
+  	
+  end
   
   def export  	
     send_data @mindmap.mm_xml, :type => "application/x-freemind;charset=gbk", 	
@@ -49,5 +51,9 @@ class Map::MindmapsController < ApplicationController
   private  
   def find_obj
     @mindmap = Map::Mindmap.find(params[:id].split("_").last.to_i)
+  end
+  
+  def set_my_menu
+  	@current_menu = :my_mmap
   end
 end

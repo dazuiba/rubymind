@@ -1,5 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+	include MindmapHelper
 	def copy_text(text, options={})
 		%[<object width="110" height="14" id="clippy" class="clippy" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
       <param value="/images/clippy.swf" name="movie"/>
